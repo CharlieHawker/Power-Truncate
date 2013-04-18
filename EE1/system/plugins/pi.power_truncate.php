@@ -30,6 +30,7 @@ class Power_truncate {
     $length = $TMPL->fetch_param('length') ? (int)$TMPL->fetch_param('length') : 100;
     $cut_words = $TMPL->fetch_param('cut_words') ? $TMPL->fetch_param('cut_words') : 'n';
     $suffix = $TMPL->fetch_param('suffix') ? $TMPL->fetch_param('suffix') : '';
+    $strip_markup = $this->EE->TMPL->fetch_param('strip_markup') ? $this->EE->TMPL->fetch_param('strip_markup') : 'n';
     $contains_html = $this->_contains_html($TMPL->tagdata);
 
     // Easy peazy if they're truncating something to a longer length
@@ -38,19 +39,19 @@ class Power_truncate {
       
     // Get string cut off at exactly specified length
     if ($contains_html)
-      $truncated = trim(substr(strip_tags($TMPL->tagdata), 0, $length));
+      $truncated = substr(trim(strip_tags($TMPL->tagdata), 0, $length));
     else
-      $truncated = trim(substr($TMPL->tagdata, 0, $length));
+      $truncated = substr(trim($TMPL->tagdata, 0, $length));
 
     // Cut words/fall back to last word end & apply suffix 
     if (!in_array(strtolower($cut_words), array('y','1','t')))
-      $truncated = trim(preg_replace('/\w+$/', '', $truncated));
+      $truncated = preg_replace('/\w+$/', '', trim($truncated));
     
     // Add suffix
     $truncated = $truncated . $suffix;
 
-    // Put HTML entities back in if necessary
-    if ($contains_html)
+    // Put HTML entities back in if necessary. Leave them out if strip_markup is yes.
+    if ($contains_html && $strip_markup == "n")
       $truncated = $this->_replace_tags($truncated, $TMPL->tagdata);
 
     return $truncated;

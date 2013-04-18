@@ -9,6 +9,7 @@ Features
 * Automatic closing of nested HTML tags
 * Option to add suffix to end of truncated text
 * Option to truncate at the end of a word or to split a word
+* Option to strip markup out of the output
 * Specify truncation length in characters
 * HTML tags ignored when caculating truncation position
 
@@ -17,7 +18,7 @@ Usage
 
     {exp:weblog:entries weblog="news" limit="5"}
       {title}
-      {exp:power_truncate length="200" cut_words="n" suffix="..."}
+      {exp:power_truncate length="200" cut_words="n" suffix="..." strip_markup="yes"}
         {body}
       {/exp:power_truncate}
     {/exp:weblog:entries}
