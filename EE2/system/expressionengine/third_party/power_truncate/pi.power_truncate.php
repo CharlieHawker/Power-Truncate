@@ -31,6 +31,7 @@ class Power_truncate {
 	$length = $this->EE->TMPL->fetch_param('length') ? (int)$this->EE->TMPL->fetch_param('length') : 100;
 	$cut_words = $this->EE->TMPL->fetch_param('cut_words') ? $this->EE->TMPL->fetch_param('cut_words') : 'n';
 	$suffix = $this->EE->TMPL->fetch_param('suffix') ? $this->EE->TMPL->fetch_param('suffix') : '';
+        $strip_markup = $this->EE->TMPL->fetch_param('strip_markup') ? $this->EE->TMPL->fetch_param('strip_markup') : 'n';
 	$contains_html = $this->_contains_html($this->EE->TMPL->tagdata);
 
 	// Easy peazy if they're truncating something to a longer length
@@ -50,8 +51,8 @@ class Power_truncate {
 	// Add suffix
 	$truncated = $truncated . $suffix;
 
-	// Put HTML entities back in if necessary
-	if ($contains_html)
+	// Put HTML entities back in if necessary. Leave them out if strip_markup is yes.
+	if ($contains_html && $strip_markup == "n")
 	  $truncated = $this->_replace_tags($truncated, $this->EE->TMPL->tagdata);
 
 	return $truncated;
