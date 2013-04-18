@@ -31,7 +31,7 @@ class Power_truncate {
 	$length = $this->EE->TMPL->fetch_param('length') ? (int)$this->EE->TMPL->fetch_param('length') : 100;
 	$cut_words = $this->EE->TMPL->fetch_param('cut_words') ? $this->EE->TMPL->fetch_param('cut_words') : 'n';
 	$suffix = $this->EE->TMPL->fetch_param('suffix') ? $this->EE->TMPL->fetch_param('suffix') : '';
-        $strip_markup = $this->EE->TMPL->fetch_param('strip_markup') ? $this->EE->TMPL->fetch_param('strip_markup') : 'n';
+	$strip_markup = $this->EE->TMPL->fetch_param('strip_markup') ? $this->EE->TMPL->fetch_param('strip_markup') : 'n';
 	$contains_html = $this->_contains_html($this->EE->TMPL->tagdata);
 
 	// Easy peazy if they're truncating something to a longer length
