@@ -40,9 +40,9 @@ class Power_truncate {
 
 	// Get string cut off at exactly specified length
 	if ($contains_html)
-	  $truncated = substr(trim(strip_tags($this->EE->TMPL->tagdata), 0, $length));
+	  $truncated = substr(trim(strip_tags($this->EE->TMPL->tagdata)), 0, $length);
 	else
-	  $truncated = substr(trim($this->EE->TMPL->tagdata, 0, $length));
+	  $truncated = substr(trim($this->EE->TMPL->tagdata), 0, $length);
 
 	// Cut words/fall back to last word end & apply suffix 
 	if (!in_array(strtolower($cut_words), array('y','1','t')))
