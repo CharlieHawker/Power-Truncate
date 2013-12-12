@@ -38,7 +38,7 @@ class Power_truncate {
       if ($strip_markup == "no") {
         return trim($this->EE->TMPL->tagdata) . $suffix . $strip_markup;    
       } else {
-        return trim(strip_tags($this->EE->TMPL->tagdata)) . $suffix . $strip_markup;
+        return trim(strip_tags($this->EE->TMPL->tagdata)) . $suffix;
       }
     }
     
