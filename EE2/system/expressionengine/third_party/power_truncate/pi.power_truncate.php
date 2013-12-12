@@ -7,7 +7,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 // Licence Details - http://creativecommons.org/licenses/by-nc-sa/3.0/
 
 $plugin_info = array('pi_name' => 'Power Truncate',
-					 'pi_version' => '1.1',
+					 'pi_version' => '1.1.1',
 					 'pi_author' => 'Charlie Hawker',
 					 'pi_author_url' => 'http://www.charliehawker.com/',
 					 'pi_description' => 'Allows powerful truncating of text/html',
@@ -35,8 +35,13 @@ class Power_truncate {
 	$contains_html = $this->_contains_html($this->EE->TMPL->tagdata);
 
 	// Easy peazy if they're truncating something to a longer length
-	if (strlen(strip_tags($this->EE->TMPL->tagdata)) <= $length)
-	  return trim($this->EE->TMPL->tagdata) . $suffix;
+	if (strlen(strip_tags($this->EE->TMPL->tagdata)) <= $length) {
+          if ($strip_markup == "no") {
+            return trim($this->EE->TMPL->tagdata) . $suffix . $strip_markup;    
+          } else {
+            return trim(strip_tags($this->EE->TMPL->tagdata)) . $suffix . $strip_markup;
+          }
+        }
 
 	// Get string cut off at exactly specified length
 	if ($contains_html)
