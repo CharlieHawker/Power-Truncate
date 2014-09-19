@@ -34,9 +34,14 @@ class Power_truncate {
     $contains_html = $this->_contains_html($TMPL->tagdata);
 
     // Easy peazy if they're truncating something to a longer length
-    if (strlen(strip_tags($TMPL->tagdata)) <= $length)
-      return trim($TMPL->tagdata) . $suffix;
-      
+    if (strlen(strip_tags($this->EE->TMPL->tagdata)) <= $length) {
+      if ($strip_markup == "no") {
+        return trim($this->EE->TMPL->tagdata) . $suffix . $strip_markup;    
+      } else {
+        return trim(strip_tags($this->EE->TMPL->tagdata)) . $suffix;
+      }
+    }
+    
     // Get string cut off at exactly specified length
     if ($contains_html)
       $truncated = substr(trim(strip_tags($TMPL->tagdata)), 0, $length);
